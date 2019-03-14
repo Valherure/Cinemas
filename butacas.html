@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<style type="text/css">
+			*, *:before, *:after {
+  box-sizing: border-box;
+}
+::selection {
+  background-color: #eee;
+}
+::-moz-selection {
+  background-color: #eee;
+}
+body{
+      background-image: url(images/cine.jpg);
+      background-size: cover;
+    }.theatre {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 5px;
+  background-color: #000;
+  padding: 20px 10px;
+  box-shadow: 0px 0px 17px -4px #000;
+}
+h1{
+  color: #fff;
+  text-align: center;
+}
+button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+button {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #7A0F24;
+  border-radius: 25px;
+  margin-left: 45%;
+}
+button:hover {
+  background-color: #7A0F24;
+  color: white;
+  border-radius: 25px;
+  margin-left: 45%;
+}
+#registro{
+  height: 30px;
+  width: 30%;
+  margin-top: 10px;
+  background-color: #fff;
+  margin-left: 35%;
+  border:3px solid #7A0F24;
+}
+#registro:focus {
+  border: 3px solid #555;
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #000;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  background-color: #7A0F24;
+  margin-left: 35%;
+}
+.appear{
+  display: none;
+}
+.screen-side {
+  text-align: center;
+}
+.screen-side .screen {
+  height: 25px;
+  margin: 0 20px;
+  border-radius: 50%;
+  box-shadow: 0px -3px 0px 1px #fff;
+  color: #fff;
+}
+.screen-side .select-text {
+  color: #fff;
+}
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.seats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+.seat {
+  display: flex;
+  flex: 0 0 14.28571%;
+  padding: 5px;
+  position: relative;
+}
+.seat:nth-child(2) {
+  margin-right: 14.28571%;
+}
+.seat input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+.seat input[type="checkbox"]:checked + label {
+  background: rgb(0,102,153);
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+.seat input[type="checkbox"]:disabled + label {
+  background: #ddd;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.seat input[type="checkbox"]:disabled + label:after {
+  content: "X";
+  text-indent: 0;
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.seat input[type="checkbox"]:disabled + label:hover {
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.seat label {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5rem;
+  padding: 4px 0;
+  color: #fff;
+  background: #7A0F24;
+  border-radius: 2px;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+  transition-duration: 300ms;
+}
+.seat label:hover {
+  cursor: pointer;
+  box-shadow: 0px 0 7px 3px #ccc;
+}
+@-webkit-keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes rubberBand {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+.rubberBand {
+  -webkit-animation-name: rubberBand;
+  animation-name: rubberBand;
+}
+	</style>
+  <script type="text/javascript">
+    function cargardatosdelapelicula()
+    {
+        var pelicula = JSON.parse(localStorage.getItem('peliculaseleccionada'))
+        
+        document.getElementById("titulodelapelicula").innerHTML += pelicula[0].NOMBRE + "<hr><p>Tanda: "+pelicula[0].FECHA+ " Inicia: "+pelicula[0].HORAINICIA +": "+pelicula[0].MINUTOINICIA+"<p/>";   
+    }
+    function cargadatosdelabutaca(iddelabutaca)
+{
+    //el id de la butaca se los pasa como parametro desde el modal al que presiono guardar
+    var peliculaencache = JSON.parse(localStorage.getItem('peliculaseleccionada'))
+       switch(iddelabutaca)
+           {
+               case "A1":
+                   peliculaencache[0].ASIENTOS.A1.NOMBREESTUADIANTE= document.getElementById("iddelinputnombredelmodal").value;
+                    peliculaencache[0].ASIENTOS.A1.CARNET= document.getElementById("iddelinputCrnetdelmodal").value;
+                    peliculaencache[0].ASIENTOS.A1.SECCION= document.getElementById("iddelinputsecciondelmodal").value;
+                   break;
+               case "A2":
+                   break;
+                   //escribir el resto de los casos, para cada una de las butacas
+           }
+    //deben tener linkeado el js de peliculafrontend
+    var peliculainstanciada = new _Pelicula(peliculaencache[0]._id,peliculaencache.NOMBRE,
+    peliculaencache[0].DURACIONMINUTOS,
+    peliculaencache[0].GENERO,
+    peliculaencache[0].IDIOMAAUDIO,
+    peliculaencache[0].IDIOMASUB,
+    peliculaencache[0].SINOPSIS,
+    peliculaencache[0].CLASIFICACION,
+    peliculaencache[0].PRECIO,
+    peliculaencache[0].HORAINICIO,
+    peliculaencache[0].FECHA,
+    peliculaencache[0].MINUTOINICIO,
+    peliculaencache[0].ASIENTOS,
+    peliculaencache[0].IMAGEN,
+    peliculaencache[0].ESTADO
+    )
+    peliculainstanciada.Modificar().then(function(response) {
+  console.log("Success!", response);
+            alert("Butaca ha sido reservada campeón");
+}, function(error) {
+  console.error("Failed!", error);
+             alert("Error " + error);         
+});   
+}
+Modificar(req,res) {
+      console.log(req.body);
+        Item.update({_id : req.body._id},{$set:{
+            //busca la id del item a modificar y cambia las caracteristicas
+            NOMBRE: req.body.NOMBRE,
+            DURACIONMINUTOS: req.body.DURACIONMINUTOS,
+            GENERO: req.body.GENERO,
+            IDIOMAAUDIO: req.body.IDIOMAAUDIO,
+            IDIOMASUB: req.body.IDIOMASUB,
+            SINOPSIS: req.body.SINOPSIS,
+            CLASIFICACION: req.body.CLASIFICACION,
+            PRECIO: req.body.PRECIO,
+            HORAINICIO: req.body.HORAINICIO,
+            FECHA: req.body.FECHA,
+            MINUTOINICIO: req.body.MINUTOINICIO,
+            ASIENTOS: req.body.ASIENTOS,
+            IMAGEN: req.body.IMAGEN,
+            ESTADO: req.body.ESTADO
+        }},(err, item) => {
+            //busca errores internos y externos
+            if (err){res.send(err);}
+            // Obtine y devuelve todas las personas tras crear una de ellas
+              else{
+                Item.find((err, item) => {
+                    if(err)res.send(err);
+                    res.json(item);
+                });
+              }
+        });
+    }
+    var peliculainstanciada = new _Pelicula(peliculaencache[0]._id,peliculaencache[0].NOMBRE,
+peliculaencache[0].DURACIONMINUTOS,
+peliculaencache[0].GENERO,
+peliculaencache[0].IDIOMAAUDIO,
+peliculaencache[0].IDIOMASUB,
+peliculaencache[0].SINOPSIS,
+peliculaencache[0].CLASIFICACION,
+peliculaencache[0].PRECIO,
+peliculaencache[0].HORAINICIO,
+peliculaencache[0].FECHA,
+peliculaencache[0].MINUTOINICIO,
+peliculaencache[0].ASIENTOS,
+peliculaencache[0].IMAGEN,
+peliculaencache[0].ESTADO
+)
+  </script>
+</head>
+<body>
+<div class="theatre">
+  <div class="screen-side">
+    <div class="screen">Pantalla</div>
+    <h3 class="select-text">Seleccione su asiento</h3>
+  </div>
+  <ol class="cabin">
+    <li class="row row--1">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" id="1A" />
+          <label for="1A">A6</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="1B" />
+          <label for="1B">A5</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="1C" />
+          <label for="1C">A4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox"  id="1D" />
+          <label for="1D">A3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="1E" />
+          <label for="1E">A2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="1F" />
+          <label for="1F">A1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--2">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" id="2A" />
+          <label for="2A">B6</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="2B" />
+          <label for="2B">B5</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="2C" />
+          <label for="2C">B4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="2D" />
+          <label for="2D">B3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="2E" />
+          <label for="2E">B2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="2F" />
+          <label for="2F">B1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--3">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" id="3A" />
+          <label for="3A">C6</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="3B" />
+          <label for="3B">C5</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="3C" />
+          <label for="3C">C4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="3D" />
+          <label for="3D">C3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="3E" />
+          <label for="3E">C2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="3F" />
+          <label for="3F">C1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--4">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" id="4A" />
+          <label for="4A">D5</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" disabled id ="4B">
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="4C" />
+          <label for="4C">D4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="4D" />
+          <label for="4D">D3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="4E" />
+          <label for="4E">D2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="4F" />
+          <label for="4F">D1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--5">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" disabled id="5A" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" disabled id="5B" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="5C" />
+          <label for="5C">E4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="5D" />
+          <label for="5D">E3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="5E" />
+          <label for="5E">E2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="5F" />
+          <label for="5F">E1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--6">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" disabled id="6A" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" disabled id="6B" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="6C" />
+          <label for="6C">F4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="6D" />
+          <label for="6D">F3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="6E" />
+          <label for="6E">F2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="6F" />
+          <label for="6F">F1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--7">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" disabled id="7A" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" disabled id="7B" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="7C" />
+          <label for="7C">G4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="7D" />
+          <label for="7D">G3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="7E" />
+          <label for="7E">G2</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="7F" />
+          <label for="7F">G1</label>
+        </li>
+      </ol>
+    </li>
+    <li class="row row--8">
+      <ol class="seats" type="A">
+        <li class="seat">
+          <input type="checkbox" disabled id="8A" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" disabled id="8B" />
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="8C" />
+          <label for="8C">H4</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="8D" />
+          <label for="8D">H3</label>
+        </li>
+        <li class="seat">
+          <input type="checkbox" id="8E" />
+          <label for="8E">H2</label>
+        </li>
+        <li class="seat">
+          <input class="button" type="checkbox" id="8F" />
+          <label for="8F">H1</label>
+        </li>
+      </ol>
+    </li>
+      </ol>
+    </li>
+  </ol>
+</div>
+<div class="appear" id="div">
+  <h1>Añada sus datos para hacer su reserva</h1>
+  <input type="text" name="nombre" id="registro">
+  <br>
+  <input type="number" name="carnet" id="registro">
+  <br>
+  <input type="text" name="seccion" id="registro">
+  <br>
+  <button id="boton">Reservar</button>
+  
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('input').click(function(){
+        $("#div").removeClass("appear")
+
+      });
+    });
+  </script>
+</body>+
+</html>
